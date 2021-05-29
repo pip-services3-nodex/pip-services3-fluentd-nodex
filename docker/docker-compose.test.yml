@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  test:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.test
+    image: ${IMAGE:-pipdevs/test}
+    depends_on:
+      - fluentd
+    environment:
+      - FLUENTD_SERVICE_HOST=fluentd
+      - FLUENTD_SERVICE_PORT=24224
+    
+  fluentd:
+    image: fluent/fluentd
+    # container_name: fluentd
+    # # volumes:
+    # #   - ./logs:/fluentd/log
+    # ports:
+    #   - "24224:24224"
+          
